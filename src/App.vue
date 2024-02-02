@@ -1,5 +1,6 @@
 <script>
 import axios from "axios";
+import config from "../config.js";
 
 export default {
   data() {
@@ -36,7 +37,7 @@ export default {
       }
       this.error = ""
 
-      axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${this.city}&units=metric&appid=793278a765dd29caf3266f1b1881b74a`)
+      axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${this.city}&units=metric&appid=${config.openWeatherMapApiKey}`)
           .then(res => (this.info = res.data))
     },
     getUserIp() {
@@ -50,7 +51,7 @@ export default {
         const ip = ipResponse.data.ip;
 
         // Получение геолокации по IP
-        const geoResponse = await axios.get(`https://ipinfo.io/${ip}/geo?token=49da726b4d2934`);
+        const geoResponse = await axios.get(`https://ipinfo.io/${ip}/geo?token=${config.ipInfoToken}`);
         const city = geoResponse.data.city;
 
         // Присваивание полученного города
